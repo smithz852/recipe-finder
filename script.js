@@ -7,6 +7,8 @@ var mealID = ''
 
 var dishArray = [];
 var dishDetials = [];
+var ingrediantArray = [];
+
 
 fetchFoodAPI();
 
@@ -37,11 +39,17 @@ function fetchDishAPI() {
         fetch(dishInfoAPI).then(function(response) {
             return response.json();
         }).then(function(data) {
-            console.log(data);
 
            dishDetials.push(data)
 
         })
     }
     console.log(dishDetials);
+    ingrediantLoop();
 }
+
+function ingrediantLoop() { 
+   console.log(dishDetials[3].meals[0].strIngredient1);
+
+}
+

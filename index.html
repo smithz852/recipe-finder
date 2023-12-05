@@ -51,23 +51,28 @@
 
 
     <div class="field">
-      <label class="label">Ingredient<label>
+      <label class="label">Ingredient</label>
       <div class="control">
-        <input class="input foodInput" type="text" placeholder="Enter Ingredients">
+
+        <!-- Added id ingredientInput-->
+        <input id="ingredientInput" class="input foodInput" type="text" placeholder="Enter Ingredients">
       </div>
-    </div>
-    
-    <container id = container> </container>
-    
-    <div class="field is-grouped">
-      <div class="control">
-        <button class="button is-link foodLink">Food</button>
-      </div>
-      <div class="control">
-        <button class="button is-link">Drinks</button>
-      </div>
-    </div>
-    
-    <script src="./script.js"></script>
-  </body> 
+    </div>       
+<container id="container">
+  <div id="ingredientList"></div>
+</container>
+  <!-- Placeholder for error message -->
+  <div id="errorMessage"></div>
+<div class="field is-grouped">
+  <div class="control">
+    <button class="button is-link foodLink">Food</button>
+  </div>
+  <div class="control">
+    <!--Added onclick attribute to run the javascript once the button is clicked-->
+    <button class="button is-link" onclick="getCocktailInfo()">Drinks</button>
+  </div>
+</div>
+
+<script src="./script.js"></script>
+</body>
 </html>

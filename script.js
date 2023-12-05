@@ -1,3 +1,104 @@
+// Function to handle the user's cocktail search
+function getCocktailInfo() {
+    console.log('getCocktailInfo called');
+    // Get the info from the input field
+    var searchTerm = document.getElementById('ingredientInput').value;
+    // Get the element where the error message will be displayed
+    var errorMessageElement = document.getElementById('errorMessage');
+    if (!searchTerm) {
+        // Display an error message on the webpage
+        errorMessageElement.textContent = "Please enter a cocktail name.";
+        return;
+    }
+    // Clear any existing error messages
+    errorMessageElement.textContent = '';
+    // Fetch cocktails by search term
+    fetchCocktails(searchTerm);
+}
+//function to make an API request and handle the response
+function fetchCocktails(searchTerm) {
+    //create a new request object
+    var xhr = new XMLHttpRequest();
+    // Define the function to handle the response
+    xhr.onreadystatechange = function () {
+        // Check if the request is complete
+        if (xhr.readyState === 4) {
+            //check if the response status is successful
+            if (xhr.status === 200) {
+                // parse to JSON response
+                var result = JSON.parse(xhr.responseText);
+                // Log the entire API response for issues
+                console.log('API Response:', result);
+                //display the retrieved cocktails
+                displayIngredients(result.drinks);
+            } else {
+                //log errrors
+                console.error('Error Status:', xhr.status);
+                console.error('Error Response:', xhr.responseText);
+            }
+        }
+    };
+    // GET request to the cocktail API with the search term
+    xhr.open('GET', 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=' + searchTerm, true);
+    //send the request
+    xhr.send();
+}
+//function to display cocktail information on the webpage
+function displayIngredients(drinks) {
+    console.log('API Response:', drinks);
+    // Get the HTML element for the list of cocktails
+    var ingredientListElement = document.getElementById('ingredientList');
+    // Clear the existing content
+    ingredientListElement.innerHTML = '';
+    // Check if 'drinks' is an array and not empty
+    if (Array.isArray(drinks) && drinks.length > 0) {
+        // go through each drink and create an HTML element
+        drinks.forEach(function (drink) {
+            // Create a container div for each drink
+            var drinkContainer = document.createElement('div');
+            drinkContainer.classList.add('drink-container');
+
+            // Create an h3 element for the drink name
+            var nameHeading = document.createElement('h3');
+            nameHeading.textContent = 'Name: ' + drink.strDrink;
+            drinkContainer.appendChild(nameHeading);
+
+            // Create a p element for the ingredients
+            var ingredientsParagraph = document.createElement('p');
+            ingredientsParagraph.textContent = 'Ingredients: ' + getIngredients(drink);
+            drinkContainer.appendChild(ingredientsParagraph);
+
+            // Create a p element for the instructions
+            var instructionsParagraph = document.createElement('p');
+            instructionsParagraph.textContent = 'Instructions: ' + drink.strInstructions;
+            drinkContainer.appendChild(instructionsParagraph);
+
+            // Append the drink container to the 'ingredientList' element
+            ingredientListElement.appendChild(drinkContainer);
+        });
+    } else {
+        // Log the entire API response to the console for issues
+        console.log('API Response:', drinks);
+        // Handle the case where 'drinks' is not a valid array
+        ingredientListElement.textContent = 'No cocktails found.';
+    }
+}
+//function to extract and format ingredients from a drink object
+function getIngredients(drink) {
+    // Extract and join the ingredients from the drink object
+    var ingredients = [];
+    for (var i = 1; i <= 15; i++) {
+        var ingredient = drink['strIngredient' + i];
+        var measure = drink['strMeasure' + i];
+        if (ingredient && measure) {
+            ingredients.push(measure + ' ' + ingredient);
+        } else if (ingredient) {
+            ingredients.push(ingredient);
+        }
+    }
+    // join the ingredients into a string
+    return ingredients.join(', ');
+}
 // For testing, will have blank array for user input later
 var foodText = [];
 var ingredient = [];

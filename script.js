@@ -99,25 +99,26 @@ function getIngredients(drink) {
     // join the ingredients into a string
     return ingredients.join(', ');
 }
-// For testing, will have blank array for user input later
-var foodText = [];
-var ingredient = [];
+
+// ****FOOD API CONTENT STARTS HERE****
+
+// Variables for food API
+
 var foodAPI = 'https://www.themealdb.com/api/json/v1/1/filter.php?i=' + ingredient;
 var mealID = ''
 var foodButton = document.querySelector('.foodLink')
 var foodInput = document.querySelector('.foodInput')
 
-
+// Arrays list for the below functions
+var foodText = [];
+var ingredient = [];
 var dishArray = [];
 var finalDishes = [];
 var matchArray = [];
 
-// put in click function
-// fetchFoodAPI();
-
-
+// Fetch request to generate meal IDs based on the user's input ingredients
 function fetchFoodAPI() {
-
+// Loop for pulling each ingredient and returning recipes based on that ingredient
 for (var i = 0; i < ingredient.length; i++) {
 
     var foodAPI = 'https://www.themealdb.com/api/json/v1/1/filter.php?i=' + ingredient[i];
@@ -129,22 +130,21 @@ for (var i = 0; i < ingredient.length; i++) {
         return response.json();
     }).then(function(data) {
         console.log(data);
-// loop for pulling meal names out of data based on a search for one ingredient
+// loop for pulling meal names out of returned data
         for (var i = 0; i < data.meals.length; i++) {
             dishArray.push(JSON.parse(data.meals[i].idMeal));
         }
     })
 }
-
-
+// Slight delay to allow for all data to enter dishArray before sorting
 setTimeout (function() {
 
     dishArray.sort(function(a, b){return a - b});
-
     console.log(dishArray);
 
+// Slight delay to allow for array to be reorganized before running loop
     setTimeout (function() {
-
+        // Compares array data to each other for matches and pushes matches to seperate array
         for (var i = 0; i < dishArray.length; i++) {
             if (dishArray[i] === dishArray[i+1]) {
                 matchArray.push(dishArray[i]);
@@ -153,12 +153,11 @@ setTimeout (function() {
     console.log(matchArray);
     fetchDishAPI();
     },1500)
-    
   }, 1500)
 }
 
 function fetchDishAPI() {
-      // loop for pulling meal names out of dishArray to search for each meal and provide all ingredients needed
+      // loop for pulling meal IDs out of matchArray to provide full recipes
       for (var i = 0; i < matchArray.length; i++) {
         mealID = matchArray[i]
         var dishInfoAPI = 'https://www.themealdb.com/api/json/v1/1/lookup.php?i=' + mealID;
@@ -166,27 +165,23 @@ function fetchDishAPI() {
         fetch(dishInfoAPI).then(function(response) {
             return response.json();
         }).then(function(data) {
-        // console.log(data)
-           finalDishes.push(data.meals[0])
+        // logs all final dishes to be put on webpage
+           finalDishes.push(data.meals[0]) 
 
         })
     }
     console.log(finalDishes); 
 }
 
-
+// Processes data from user input and converts into usable string data
 function ingredientList() {
     var food = foodInput.value
     var foodSplit = food.split(', ');
     
 for (var i = 0; i < foodSplit.length; i++) {
-
     ingredient.push(foodSplit[i])
     console.log(ingredient)
 }
-
-
-
 
     setTimeout(function() {
         fetchFoodAPI();
@@ -201,11 +196,9 @@ for (var i = 0; i < foodSplit.length; i++) {
 
 
 
-
+// click event for food button
 foodButton.addEventListener('click', function(event) {
-
 event.preventDefault();
-
 ingredientList();
 
 })

@@ -1,9 +1,10 @@
 // For testing, will have blank array for user input later
-var ingredient = ['chicken', 'spinach', 'lettuce', 'bread', 'apple', 'sausage'];
+var foodText = [];
+var ingredient = [];
 var foodAPI = 'https://www.themealdb.com/api/json/v1/1/filter.php?i=' + ingredient;
 var mealID = ''
-
-
+var foodButton = document.querySelector('.foodLink')
+var foodInput = document.querySelector('.foodInput')
 
 
 var dishArray = [];
@@ -11,18 +12,19 @@ var finalDishes = [];
 var matchArray = [];
 
 // put in click function
-fetchFoodAPI();
+// fetchFoodAPI();
 
 
 function fetchFoodAPI() {
 
 for (var i = 0; i < ingredient.length; i++) {
-console.log(ingredient[i])
+
     var foodAPI = 'https://www.themealdb.com/api/json/v1/1/filter.php?i=' + ingredient[i];
 
-
+    console.log(ingredient[i]);
+    console.log(foodAPI);
     fetch(foodAPI).then(function(response) {
-        // console.log(foodAPI);
+        console.log(foodAPI);
         return response.json();
     }).then(function(data) {
         console.log(data);
@@ -71,3 +73,38 @@ function fetchDishAPI() {
     console.log(finalDishes); 
 }
 
+
+function ingredientList() {
+    var food = foodInput.value
+    var foodSplit = food.split(', ');
+    
+for (var i = 0; i < foodSplit.length; i++) {
+
+    ingredient.push(foodSplit[i])
+    console.log(ingredient)
+}
+
+
+
+
+    setTimeout(function() {
+        fetchFoodAPI();
+    }, 2000)
+}
+
+
+
+
+
+
+
+
+
+
+foodButton.addEventListener('click', function(event) {
+
+event.preventDefault();
+
+ingredientList();
+
+})

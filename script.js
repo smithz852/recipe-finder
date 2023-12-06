@@ -104,6 +104,8 @@ function getIngredients(drink) {
 
 // Variables for food API
 
+
+var ingredientListElement = document.getElementById('foodRecipes');
 var foodAPI = 'https://www.themealdb.com/api/json/v1/1/filter.php?i=' + ingredient;
 var mealID = ''
 var foodButton = document.querySelector('.foodLink')
@@ -167,10 +169,17 @@ function fetchDishAPI() {
         }).then(function(data) {
         // logs all final dishes to be put on webpage
            finalDishes.push(data.meals[0]) 
-
+        //    console.log(finalDishes)
+           
         })
     }
-    console.log(finalDishes); 
+    console.log(finalDishes);
+    setTimeout(function() {
+
+        displayFoodIngredients(finalDishes);
+        console.log(finalDishes)
+    }, 2000) 
+  
 }
 
 // Processes data from user input and converts into usable string data
@@ -190,8 +199,68 @@ for (var i = 0; i < foodSplit.length; i++) {
 
 
 
+//spinach, chicken, potato, marinara, onion, beef
 
 
+
+
+//function to display food recipe information on the webpage
+function displayFoodIngredients() {
+    // console.log('API Response:', drinks);
+    // Get the HTML element for the list of cocktails
+    var ingredientListElement = document.getElementById('foodRecipes');
+    // Clear the existing content
+    ingredientListElement.innerHTML = '';
+    // Check if 'finalDishes' is an array and not empty
+    if (Array.isArray(finalDishes) && finalDishes.length > 0) {
+        console.log(finalDishes)
+        // go through each recipe and create an HTML element
+        finalDishes.forEach(function (recipeResult) {
+            // Create a container div for each recipe
+            var drinkContainer = document.createElement('div');
+            drinkContainer.classList.add('drink-container');
+
+            // Create an h3 element for the recipe name
+            var nameHeading = document.createElement('h3');
+            nameHeading.textContent = 'Name: ' + recipeResult.strMeal;
+            drinkContainer.appendChild(nameHeading);
+
+            // Create a p element for the ingredients
+            var ingredientsParagraph = document.createElement('p');
+            ingredientsParagraph.textContent = 'Ingredients: ' + getFoodIngredients(recipeResult);
+            drinkContainer.appendChild(ingredientsParagraph);
+
+            // Create a p element for the instructions
+            var instructionsParagraph = document.createElement('p');
+            instructionsParagraph.textContent = 'Instructions: ' + recipeResult.strInstructions;
+            drinkContainer.appendChild(instructionsParagraph);
+
+            // Append the drink container to the 'ingredientList' element
+            ingredientListElement.appendChild(drinkContainer);
+        });
+    } else {
+        // Log the entire API response to the console for issues
+        // console.log('API Response:', drinks);
+        // Handle the case where 'drinks' is not a valid array
+        ingredientListElement.textContent = 'No Food Found';
+    }
+}
+//function to extract and format ingredients from a drink object
+function getFoodIngredients(recipeResult) {
+    // Extract and join the ingredients from the final recipe object
+    var ingredientsArray = [];
+    for (var i = 1; i <= 15; i++) {
+        var foodIngredient = recipeResult['strIngredient' + i];
+        var measure = recipeResult['strMeasure' + i];
+        if (foodIngredient && measure) {
+            ingredientsArray.push(measure + ' ' + foodIngredient);
+        } else if (foodIngredient) {
+            ingredientsArray.push(foodIngredient);
+        }
+    }
+    // join the ingredients into a string
+    return ingredientsArray.join(', ');
+}
 
 
 

@@ -241,13 +241,13 @@ function displayFoodIngredients() {
     } else {
         // Log the entire API response to the console for issues
         // console.log('API Response:', drinks);
-        // Handle the case where 'drinks' is not a valid array
+        // Handle the case where 'finalDishes' is not a valid array
         ingredientListElement.textContent = 'No Food Found';
     }
 }
 //function to extract and format ingredients from a drink object
 function getFoodIngredients(recipeResult) {
-    // Extract and join the ingredients from the final recipe object
+    // Extract and join the ingredients from the final object
     var ingredientsArray = [];
     for (var i = 1; i <= 15; i++) {
         var foodIngredient = recipeResult['strIngredient' + i];

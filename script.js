@@ -153,10 +153,35 @@ setTimeout (function() {
             }
         }
     console.log(matchArray);
-    fetchDishAPI();
-    },1500)
-  }, 1500)
+    fetchCheck();
+    }, 500)
+  }, 500)
 }
+
+
+
+function fetchCheck() {
+    if (matchArray.length < 6) {
+
+        var matchesQty = matchArray.length
+        console.log(matchArray.length);
+        var recipesNeeded = 6 - matchesQty;
+ 
+        for (var i = 0; i < recipesNeeded; i++) {
+            matchArray.push(dishArray[i])
+            console.log(dishArray[i])
+        }
+
+        console.log(matchArray);
+        fetchDishAPI();
+
+       } else {
+        fetchDishAPI();
+       }
+}
+
+
+
 
 function fetchDishAPI() {
       // loop for pulling meal IDs out of matchArray to provide full recipes
@@ -178,8 +203,8 @@ function fetchDishAPI() {
 
         displayFoodIngredients(finalDishes);
         console.log(finalDishes)
-    }, 2000) 
-  
+    }, 500) 
+
 }
 
 // Processes data from user input and converts into usable string data
@@ -194,7 +219,7 @@ for (var i = 0; i < foodSplit.length; i++) {
 
     setTimeout(function() {
         fetchFoodAPI();
-    }, 2000)
+    }, 500)
 }
 
 
@@ -242,7 +267,7 @@ function displayFoodIngredients() {
         // Log the entire API response to the console for issues
         // console.log('API Response:', drinks);
         // Handle the case where 'finalDishes' is not a valid array
-        ingredientListElement.textContent = 'No Food Found';
+        ingredientListElement.textContent = 'No Recipes Found';
     }
 }
 //function to extract and format ingredients from a drink object

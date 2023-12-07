@@ -110,6 +110,7 @@ var foodAPI = 'https://www.themealdb.com/api/json/v1/1/filter.php?i=' + ingredie
 var mealID = ''
 var foodButton = document.querySelector('.foodLink')
 var foodInput = document.querySelector('.foodInput')
+var infoButton = ''
 
 // Arrays list for the below functions
 var foodText = [];
@@ -231,6 +232,8 @@ for (var i = 0; i < foodSplit.length; i++) {
 
 //function to display food recipe information on the webpage
 function displayFoodIngredients() {
+
+    
     // console.log('API Response:', drinks);
     // Get the HTML element for the list of cocktails
     var ingredientListElement = document.getElementById('foodRecipes');
@@ -256,8 +259,21 @@ function displayFoodIngredients() {
             drinkContainer.appendChild(ingredientsParagraph);
 
             // Create a p element for the instructions
-            var instructionsParagraph = document.createElement('p');
-            instructionsParagraph.textContent = 'Instructions: ' + recipeResult.strInstructions;
+            // recipeResult.strInstructions.substring(0,150)  for intruction results
+            var instructionsButton = document.createElement('button');
+            var instructionsParagraph = document.createElement('p')
+            instructionsButton.classList.add('button', 'is-ghost',)
+            instructionsParagraph.classList.add('hide', 'instructionsFood')
+
+            instructionsButton.onclick = function () {
+            
+                instructionsParagraph.classList.toggle('hide')
+            }
+        
+            // var infoButton = document.createElement('button')
+            instructionsButton.textContent = 'Instructions';
+            instructionsParagraph.textContent = recipeResult.strInstructions
+            drinkContainer.appendChild(instructionsButton);
             drinkContainer.appendChild(instructionsParagraph);
 
             // Append the drink container to the 'ingredientList' element
@@ -296,3 +312,4 @@ event.preventDefault();
 ingredientList();
 
 })
+

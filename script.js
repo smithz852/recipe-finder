@@ -294,8 +294,8 @@ function displayFoodIngredients() {
             instructionsButton.classList.add('button', 'is-ghost',)
             instructionsParagraph.classList.add('hide', 'instructionsFood')
 
+            // Enables toggle fucntion for recipe instructions
             instructionsButton.onclick = function () {
-            
                 instructionsParagraph.classList.toggle('hide')
             }
         
@@ -314,6 +314,11 @@ function displayFoodIngredients() {
         // Handle the case where 'finalDishes' is not a valid array
         ingredientListElement.textContent = 'No Recipes Found';
     }
+    setTimeout(function() {
+
+        emptyDishes();
+    }, 1000)
+   
 }
 //function to extract and format ingredients from a drink object
 function getFoodIngredients(recipeResult) {
@@ -332,12 +337,18 @@ function getFoodIngredients(recipeResult) {
     return ingredientsArray.join(', ');
 }
 
-
+function emptyDishes() {
+    foodText = [];
+    dishArray = [];
+    finalDishes = [];
+    matchArray = [];
+}
 
 
 // click event for food button
 foodButton.addEventListener('click', function(event) {
 event.preventDefault();
+// emptyDishes();
 ingredientList();
 
 })

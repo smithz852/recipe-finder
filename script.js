@@ -159,14 +159,14 @@ setTimeout (function() {
 }
 
 
-
+// To check if match array has enough recipes
 function fetchCheck() {
     if (matchArray.length < 6) {
 
         var matchesQty = matchArray.length
         console.log(matchArray.length);
         var recipesNeeded = 6 - matchesQty;
- 
+ // Adds more recipes to array if there are not enough matches
         for (var i = 0; i < recipesNeeded; i++) {
             matchArray.push(dishArray[i])
             console.log(dishArray[i])

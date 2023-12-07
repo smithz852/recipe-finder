@@ -9,6 +9,12 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
+//
+
+function reloadPage() {
+    location.reload();
+  }
+
   
 // Function to handle the user's cocktail search
 function getCocktailInfo() {

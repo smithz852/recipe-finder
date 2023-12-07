@@ -1,22 +1,10 @@
 header {
   background-color: #f0f0f0; /* Set a background color */
-  padding: 30px; /* Add some padding for better visibility */
+  padding-top: 30px; /* Add some padding for better visibility */
 }
 
 .navbar {
   margin-bottom: 10px; /* Adjust the margin to create space between header and navbar */
-}
-
-.label {
-  font-size: 1.5rem; /* Adjust font size */
-  font-weight: bold; /* Make it bold */
-  color: #333; /* Set text color */
-  margin-bottom: 8px; /* Add some bottom margin for spacing */
-  display: block; /* Make it a block element */
-}
-
-.foodInput {
-  border-radius: 5px; /* Adjust border-radius for rounded corners */
 }
 
 .navbar-dropdown {
@@ -28,11 +16,28 @@ header {
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow */
 }
 
+.navbar-dropdown.is-active {
+  display: block;
+}
+
 /* Style the dropdown items */
 .navbar-dropdown a {
   color: #333; /* Set text color */
   padding: 10px; /* Add padding for better spacing */
   display: block; /* Make each item a block element */
+}
+
+.label {
+  font-size: 1.5rem; /* Adjust font size */
+  font-weight: bold; /* Make it bold */
+  color: #333; /* Set text color */
+  margin-bottom: 8px; /* Add some bottom margin for spacing */
+  display: block; /* Make it a block element */
+  padding-left: 5px;
+}
+
+.foodInput {
+  border-radius: 5px; /* Adjust border-radius for rounded corners */
 }
 
 .drink-container {

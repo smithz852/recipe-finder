@@ -28,10 +28,21 @@ function getCocktailInfo() {
         errorMessageElement.textContent = "Please enter a cocktail name.";
         return;
     }
+    // Save to local storage
+    localStorage.setItem('lastSearchTerm', searchTerm);
     // Clear any existing error messages
     errorMessageElement.textContent = '';
     // Fetch cocktails by search term
     fetchCocktails(searchTerm);
+}
+// Function to retrieve last search term from local storage
+function loadLastSearchTerm() {
+    var lastSearchTerm = localStorage.getItem('lastSearchTerm');
+    if (lastSearchTerm) {
+        document.getElementById('ingredientInput').value = lastSearchTerm;
+        // Fetch cocktails by the last search term
+        fetchCocktails(lastSearchTerm);
+    }
 }
 //function to make an API request and handle the response
 function fetchCocktails(searchTerm) {
@@ -117,7 +128,7 @@ function getIngredients(drink) {
     // join the ingredients into a string
     return ingredients.join(', ');
 }
-
+loadLastSearchTerm();
 // ****FOOD API CONTENT STARTS HERE****
 
 // Variables for food API

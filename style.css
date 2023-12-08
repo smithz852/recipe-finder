@@ -105,12 +105,12 @@
 
   .flex {
     display: flex;
+    gap: 5px;
   }
 
   .photoContainer {
     width: 100px;
     height: fit-content;
-    /* background-color: blue; */
     border: 3px solid;
     margin: 2%;
     flex-basis: 20%;

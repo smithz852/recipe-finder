@@ -28,12 +28,22 @@
       </div> 
     </nav>
 
-  <div class="field">
-    <label class="label">Ingredient</label>
+  <div id="inputContainer" class="field">
+    <label class="label">Ingredients:</label>
     <div class="control">
-
-      <!-- Added id ingredientInput-->
       <input id="ingredientInput" class="input foodInput is-rounded" type="text" placeholder="Enter Ingredients">
+    </div>
+  </div>
+
+  <div id="enteredIngredientContainer"></div>
+
+  <div id="errorMessage"></div>
+  <div class="field is-grouped is-flex is-justify-content-center">
+    <div class="control">
+      <button class="button is-link is-outlined foodLink">Food</button>
+    </div>
+    <div class="control">
+      <button class="button is-link is-outlined" onclick="getCocktailInfo()">Drinks</button>
     </div>
   </div>
 
@@ -41,18 +51,6 @@
     <div id="ingredientList"></div>
     <div id="foodRecipes"></div>
   </container>
-
-  <!-- Placeholder for error message -->
-  <div id="errorMessage"></div>
-  <div class="field is-grouped">
-    <div class="control">
-      <button class="button is-link is-outlined foodLink">Food</button>
-    </div>
-    <div class="control">
-      <!--Added onclick attribute to run the javascript once the button is clicked-->
-      <button class="button is-link is-outlined" onclick="getCocktailInfo()">Drinks</button>
-    </div>
-  </div>
 
   <script src="./script.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/bulma@0.9.4/js/bulma.min.js"></script>

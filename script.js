@@ -89,6 +89,17 @@ function fetchCocktails(searchTerm) {
 }
 //function to display cocktail information on the webpage
 function displayIngredients(drinks) {
+
+    var foodListElement = document.getElementById('foodRecipes')
+    // To check if content is already on page, and adds a flex box if so
+    if (foodListElement.hasChildNodes()) {
+        listContainer.classList.add('flex')
+        console.log('Has Children')
+    } else {
+        console.log('No Children')
+        foodListElement.classList.remove('flex')
+    }
+
     console.log('API Response:', drinks);
     // Get the HTML element for the list of cocktails
     var ingredientListElement = document.getElementById('ingredientList');
@@ -206,7 +217,7 @@ loadLastSearchTerm();
 
 // Variables for food API
 
-
+var listContainer = document.getElementById('container')
 var ingredientListElement = document.getElementById('foodRecipes');
 var foodAPI = 'https://www.themealdb.com/api/json/v1/1/filter.php?i=' + ingredient;
 var mealID = ''
@@ -335,7 +346,17 @@ for (var i = 0; i < foodSplit.length; i++) {
 //function to display food recipe information on the webpage
 function displayFoodIngredients() {
 
-    
+    var drinkListElement = document.getElementById('ingredientList')
+    // To check if content is already on page, and adds a flex box if so
+
+    if (drinkListElement.hasChildNodes()) {
+        listContainer.classList.add('flex')
+        console.log('Has Children')
+    } else {
+        console.log('No Children')
+        listContainer.classList.remove('flex')
+    }
+
     // console.log('API Response:', drinks);
     // Get the HTML element for the list of cocktails
     var ingredientListElement = document.getElementById('foodRecipes');

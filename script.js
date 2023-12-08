@@ -98,31 +98,44 @@ function displayIngredients(drinks) {
     if (Array.isArray(drinks) && drinks.length > 0) {
         // go through each drink and create an HTML element
         drinks.forEach(function (drink) {
+
+
             // Create a container div for each drink
             var drinkContainer = document.createElement('div');
-            drinkContainer.classList.add('drink-container');
+            drinkContainer.classList.add('drink-container', 'flex');
+
+            
+             // photo placeholder withing div
+             var imgContainer = ''
+             imgContainer = `<img class = 'photoContainer' src = '${drink.strDrinkThumb}'></img>`
+              drinkContainer.innerHTML = imgContainer
+ 
+              var textDiv = document.createElement('div')
+              textDiv.classList.add('textFlex')
+              drinkContainer.appendChild(textDiv)
 
             // Create an h3 element for the drink name
             var nameHeading = document.createElement('h3');
             nameHeading.textContent = 'Name: ' + drink.strDrink;
-            drinkContainer.appendChild(nameHeading);
+            textDiv.appendChild(nameHeading);
 
             // Create a p element for the ingredients
             var ingredientsParagraph = document.createElement('p');
             ingredientsParagraph.textContent = 'Ingredients: ' + getIngredients(drink);
-            drinkContainer.appendChild(ingredientsParagraph);
+            textDiv.appendChild(ingredientsParagraph);
 
             // Create a button for the instructions toggle
             var instructionsButton = document.createElement('button');
             instructionsButton.textContent = 'Instructions';
             instructionsButton.classList.add('button', 'is-ghost');
-            drinkContainer.appendChild(instructionsButton);
+            instructionsButton.style.cssText = 'align-self: baseline'  //adjusts button styling
+            textDiv.appendChild(instructionsButton);
 
             // Create a p element for the instructions
             var instructionsParagraph = document.createElement('p');
-            instructionsParagraph.textContent = 'Instructions: ' + drink.strInstructions;
+            instructionsParagraph.textContent = drink.strInstructions;
             instructionsParagraph.classList.add('hide', 'instructionsFood');
-            drinkContainer.appendChild(instructionsParagraph);
+            textDiv.appendChild(instructionsParagraph);
             
             // Toggle function for instructions
             instructionsButton.onclick = function () {
@@ -371,7 +384,7 @@ function displayFoodIngredients() {
             var instructionsButton = document.createElement('button');
             var instructionsParagraph = document.createElement('p')
             instructionsButton.classList.add('button', 'is-ghost',)
-            instructionsButton.style.cssText = 'padding-left: 0px; align-self: baseline'  //adjusts button styling
+            instructionsButton.style.cssText = 'align-self: baseline'  //adjusts button styling
             instructionsParagraph.classList.add('hide', 'instructionsFood')
 
             // Enables toggle fucntion for recipe instructions

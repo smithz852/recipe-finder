@@ -34,6 +34,8 @@ function getCocktailInfo() {
     errorMessageElement.textContent = '';
     // Fetch cocktails by search term
     fetchCocktails(searchTerm);
+    // Display entered ingredient in a box
+    displayEnteredIngredient(searchTerm);
 }
 // Function to retrieve last search term from local storage
 function loadLastSearchTerm() {
@@ -97,10 +99,22 @@ function displayIngredients(drinks) {
             ingredientsParagraph.textContent = 'Ingredients: ' + getIngredients(drink);
             drinkContainer.appendChild(ingredientsParagraph);
 
+            // Create a button for the instructions toggle
+            var instructionsButton = document.createElement('button');
+            instructionsButton.textContent = 'Instructions';
+            instructionsButton.classList.add('button', 'is-ghost');
+            drinkContainer.appendChild(instructionsButton);
+
             // Create a p element for the instructions
             var instructionsParagraph = document.createElement('p');
             instructionsParagraph.textContent = 'Instructions: ' + drink.strInstructions;
+            instructionsParagraph.classList.add('hide', 'instructionsFood');
             drinkContainer.appendChild(instructionsParagraph);
+            
+            // Toggle function for instructions
+            instructionsButton.onclick = function () {
+                instructionsParagraph.classList.toggle('hide');
+            }
 
             // Append the drink container to the 'ingredientList' element
             ingredientListElement.appendChild(drinkContainer);
@@ -112,6 +126,7 @@ function displayIngredients(drinks) {
         ingredientListElement.textContent = 'No cocktails found.';
     }
 }
+
 //function to extract and format ingredients from a drink object
 function getIngredients(drink) {
     // Extract and join the ingredients from the drink object
@@ -127,6 +142,34 @@ function getIngredients(drink) {
     }
     // join the ingredients into a string
     return ingredients.join(', ');
+}
+
+// Function to clear the page and local storage
+function clearEnteredIngredients() {
+    // Clear entered ingredients
+    var enteredIngredientBox = document.querySelector('.field');
+    enteredIngredientBox.innerHTML = '';
+}
+
+// Function to clear the page and local storage
+function clearEnteredIngredients() {
+    // Get the container of entered ingredients
+    var enteredIngredientBox = document.querySelector('.field');
+    // Remove spans with entered ingredients
+    var enteredIngredientSpans = enteredIngredientBox.querySelectorAll('span');
+    enteredIngredientSpans.forEach(function (span) {
+        span.remove();
+    });
+}
+
+// Function to clear the page and local storage
+function clearPage() {
+    // Clear entered ingredients
+    clearEnteredIngredients();
+    // Clear the ingredientList content
+    document.getElementById('ingredientList').innerHTML = '';
+    // Clear local storage
+    localStorage.removeItem('lastSearchTerm');
 }
 loadLastSearchTerm();
 // ****FOOD API CONTENT STARTS HERE****

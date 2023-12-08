@@ -9,14 +9,27 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
-//
+// reload page function
 
 function reloadPage() {
     location.reload();
   }
 
-  
-// Function to handle the user's cocktail search
+// function to display the user's ingredient list whenever they make an input
+
+var ingredientInput = document.getElementById('ingredientInput');
+ingredientInput.addEventListener('input', function () {
+    var inputValue = ingredientInput.value;
+    updateIngredientContainer(inputValue);
+});
+
+function updateIngredientContainer(value) {
+   var ingredientContainer = document.getElementById('enteredIngredientContainer');
+   ingredientContainer.textContent = 'Ingredient List: ' + value;
+}
+
+
+  // Function to handle the user's cocktail search
 function getCocktailInfo() {
     console.log('getCocktailInfo called');
     // Get the info from the input field

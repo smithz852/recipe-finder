@@ -36,6 +36,37 @@ header {
   padding-left: 5px;
 }
 
+#inputContainer {
+  display: flex;
+  align-items: center;
+}
+
+/* Style for the ingredient input */
+#ingredientInput {
+  margin-left: 10px; /* Add some space between the input and the displayed ingredients */
+}
+
+/* Style for the container displaying entered ingredients */
+#enteredIngredientContainer {
+  background-color: #f8f9fa; /* Light gray background color */
+  border: 1px solid #ced4da; /* Light border color */
+  padding: 15px; /* Increased padding for more space */
+  margin-bottom: 10px; /* Margin at the bottom for separation */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle box shadow for depth */
+  transition: background-color 0.3s ease; /* Smooth transition for background color */
+  display: flex; /* Use flexbox for layout */
+  align-items: center; /* Center items vertically */
+  justify-content: space-between;
+  max-width: 600px; /* Adjust the max-width based on your preference */
+  margin: 0 auto;
+}
+
+#enteredIngredientContainer:hover {
+  background-color: #e2e6ea;
+}
+
+
 .foodInput {
   border-radius: 5px; /* Adjust border-radius for rounded corners */
 }

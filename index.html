@@ -1,60 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-  <title>Recipe Finder</title>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="stylesheet" href="./style.css" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
-</head>
-
-<body>
-  <header class="title is-1 has-text-centered has-text-weight-bold has-text-info" style="margin-top: 20px;">Recipe
-    Finder</header>
-    <nav class="navbar is-primary is-fixed-top" role="navigation" aria-label="main navigation">
-      <div class="navbar-brand">
-        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
-        </a>
-      </div>
-      <div id="navbarBasicExample" class="navbar-menu">
-        <div class="navbar-end">
-          <a class="navbar-item" href="#" onclick="reloadPage()">Home</a>
-          <a class="navbar-item" href="#">Favorites</a>
+    <head>
+        <title>Recipe Finder</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="./style.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    </head>
+    <body>
+        <header class="title is-1 has-text-centered has-text-weight-bold has-text-info" style="margin-top: 20px;">
+            Recipe
+    Finder
+        </header>
+        <nav class="navbar is-primary is-fixed-top" role="navigation" aria-label="main navigation">
+            <div class="navbar-brand">
+                <a
+                    role="button"
+                    class="navbar-burger"
+                    aria-label="menu"
+                    aria-expanded="false"
+                    data-target="navbarBasicExample"
+                >
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                </a>
+            </div>
+            <div id="navbarBasicExample" class="navbar-menu">
+                <div class="navbar-end">
+                    <a class="navbar-item" href="#" onclick="reloadPage()">Home</a>
+                    <a class="navbar-item" href="#">Favorites</a>
+                </div>
+            </div>
+        </nav>
+        <div id="inputContainer" class="field">
+            <label class="label">Ingredients:</label>
+            <div class="control">
+                <input
+                    id="ingredientInput"
+                    class="input foodInput is-rounded"
+                    type="text"
+                    placeholder="Enter Ingredients"
+                >
+            </div>
         </div>
-      </div> 
-    </nav>
-
-  <div id="inputContainer" class="field">
-    <label class="label">Ingredients:</label>
-    <div class="control">
-      <input id="ingredientInput" class="input foodInput is-rounded" type="text" placeholder="Enter Ingredients">
-    </div>
-  </div>
-
-  <div id="enteredIngredientContainer"></div>
-
-  <div id="errorMessage"></div>
-  <div class="field is-grouped is-flex is-justify-content-center">
-    <div class="control">
-      <button class="button is-link is-outlined foodLink">Food</button>
-    </div>
-    <div class="control">
-      <button class="button is-link is-outlined" onclick="getCocktailInfo()">Drinks</button>
-      <button class="button is-link is-outlined" onclick="clearPage()">Clear Page</button>
-    </div>
-  </div>
-
-  <container id="container" class="container mt-4">
-    <div id="ingredientList"></div>
-    <div id="foodRecipes"></div>
-  </container>
-
-  <script src="./script.js"></script>
-  <script defer src="https://cdn.jsdelivr.net/npm/bulma@0.9.4/js/bulma.min.js"></script>
-</body>
-
+        <div id="enteredIngredientContainer"></div>
+        <div id="errorMessage"></div>
+        <div class="field is-grouped is-flex is-justify-content-center">
+            <div class="control">
+                <button class="button is-link is-outlined foodLink">Food</button>
+            </div>
+            <div class="control">
+                <button class="button is-link is-outlined" onclick="getCocktailInfo()">Drinks</button>
+                <button class="button is-link is-outlined" onclick="clearPage()">Clear Page</button>
+            </div>
+        </div>
+        <container id="container" class="container mt-4">
+                <div id="ingredientList"></div>
+                <div id="foodRecipes"></div>
+        </container>
+        <script src="./script.js"></script>
+        <script defer src="https://cdn.jsdelivr.net/npm/bulma@0.9.4/js/bulma.min.js"></script>
+    </body>
 </html>

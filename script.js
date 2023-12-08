@@ -170,6 +170,10 @@ function clearPage() {
     document.getElementById('ingredientList').innerHTML = '';
     // Clear local storage
     localStorage.removeItem('lastSearchTerm');
+     // Clear food API content
+    document.getElementById('foodRecipes').innerHTML = '';
+    // Clear ingredient array
+    ingredient = [];
 }
 loadLastSearchTerm();
 // ****FOOD API CONTENT STARTS HERE****

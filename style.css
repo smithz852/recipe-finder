@@ -92,3 +92,27 @@ header {
     margin-bottom: 8px;
   }
   
+  .hide {
+    display: none !important;
+  }
+
+  .flex {
+    display: flex;
+  }
+
+  .photoContainer {
+    width: 100px;
+    height: fit-content;
+    /* background-color: blue; */
+    border: 3px solid;
+    margin: 2%;
+    flex-basis: 20%;
+    object-fit: contain;
+  }
+
+ 
+
+  .textFlex {
+    display: flex;
+    flex-direction: column;
+  }

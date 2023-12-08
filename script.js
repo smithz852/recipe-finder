@@ -41,10 +41,23 @@ function getCocktailInfo() {
         errorMessageElement.textContent = "Please enter a cocktail name.";
         return;
     }
+    // Save to local storage
+    localStorage.setItem('lastSearchTerm', searchTerm);
     // Clear any existing error messages
     errorMessageElement.textContent = '';
     // Fetch cocktails by search term
     fetchCocktails(searchTerm);
+    // Display entered ingredient in a box
+    displayEnteredIngredient(searchTerm);
+}
+// Function to retrieve last search term from local storage
+function loadLastSearchTerm() {
+    var lastSearchTerm = localStorage.getItem('lastSearchTerm');
+    if (lastSearchTerm) {
+        document.getElementById('ingredientInput').value = lastSearchTerm;
+        // Fetch cocktails by the last search term
+        fetchCocktails(lastSearchTerm);
+    }
 }
 //function to make an API request and handle the response
 function fetchCocktails(searchTerm) {
@@ -99,10 +112,22 @@ function displayIngredients(drinks) {
             ingredientsParagraph.textContent = 'Ingredients: ' + getIngredients(drink);
             drinkContainer.appendChild(ingredientsParagraph);
 
+            // Create a button for the instructions toggle
+            var instructionsButton = document.createElement('button');
+            instructionsButton.textContent = 'Instructions';
+            instructionsButton.classList.add('button', 'is-ghost');
+            drinkContainer.appendChild(instructionsButton);
+
             // Create a p element for the instructions
             var instructionsParagraph = document.createElement('p');
             instructionsParagraph.textContent = 'Instructions: ' + drink.strInstructions;
+            instructionsParagraph.classList.add('hide', 'instructionsFood');
             drinkContainer.appendChild(instructionsParagraph);
+            
+            // Toggle function for instructions
+            instructionsButton.onclick = function () {
+                instructionsParagraph.classList.toggle('hide');
+            }
 
             // Append the drink container to the 'ingredientList' element
             ingredientListElement.appendChild(drinkContainer);
@@ -114,6 +139,7 @@ function displayIngredients(drinks) {
         ingredientListElement.textContent = 'No cocktails found.';
     }
 }
+
 //function to extract and format ingredients from a drink object
 function getIngredients(drink) {
     // Extract and join the ingredients from the drink object
@@ -131,6 +157,38 @@ function getIngredients(drink) {
     return ingredients.join(', ');
 }
 
+// Function to clear the page and local storage
+function clearEnteredIngredients() {
+    // Clear entered ingredients
+    var enteredIngredientBox = document.querySelector('.field');
+    enteredIngredientBox.innerHTML = '';
+}
+
+// Function to clear the page and local storage
+function clearEnteredIngredients() {
+    // Get the container of entered ingredients
+    var enteredIngredientBox = document.querySelector('.field');
+    // Remove spans with entered ingredients
+    var enteredIngredientSpans = enteredIngredientBox.querySelectorAll('span');
+    enteredIngredientSpans.forEach(function (span) {
+        span.remove();
+    });
+}
+
+// Function to clear the page and local storage
+function clearPage() {
+    // Clear entered ingredients
+    clearEnteredIngredients();
+    // Clear the ingredientList content
+    document.getElementById('ingredientList').innerHTML = '';
+    // Clear local storage
+    localStorage.removeItem('lastSearchTerm');
+     // Clear food API content
+    document.getElementById('foodRecipes').innerHTML = '';
+    // Clear ingredient array
+    ingredient = [];
+}
+loadLastSearchTerm();
 // ****FOOD API CONTENT STARTS HERE****
 
 // Variables for food API
@@ -141,6 +199,7 @@ var foodAPI = 'https://www.themealdb.com/api/json/v1/1/filter.php?i=' + ingredie
 var mealID = ''
 var foodButton = document.querySelector('.foodLink')
 var foodInput = document.querySelector('.foodInput')
+var infoButton = ''
 
 // Arrays list for the below functions
 var foodText = [];
@@ -262,6 +321,8 @@ for (var i = 0; i < foodSplit.length; i++) {
 
 //function to display food recipe information on the webpage
 function displayFoodIngredients() {
+
+    
     // console.log('API Response:', drinks);
     // Get the HTML element for the list of cocktails
     var ingredientListElement = document.getElementById('foodRecipes');
@@ -270,26 +331,59 @@ function displayFoodIngredients() {
     // Check if 'finalDishes' is an array and not empty
     if (Array.isArray(finalDishes) && finalDishes.length > 0) {
         console.log(finalDishes)
+
+
+
+
         // go through each recipe and create an HTML element
         finalDishes.forEach(function (recipeResult) {
+
+             
+           
+
             // Create a container div for each recipe
             var drinkContainer = document.createElement('div');
-            drinkContainer.classList.add('drink-container');
+            drinkContainer.classList.add('drink-container', 'flex');
+
+            // photo placeholder withing div
+            var imgContainer = ''
+            // imgContainer.classList.add('photoContainer')
+            imgContainer = `<img class = 'photoContainer' src = '${recipeResult.strMealThumb}'></img>`
+            //  drinkContainer.appendChild(imgContainer)
+             drinkContainer.innerHTML = imgContainer
+
+             var textDiv = document.createElement('div')
+             textDiv.classList.add('textFlex')
+             drinkContainer.appendChild(textDiv)
 
             // Create an h3 element for the recipe name
             var nameHeading = document.createElement('h3');
             nameHeading.textContent = 'Name: ' + recipeResult.strMeal;
-            drinkContainer.appendChild(nameHeading);
+            textDiv.appendChild(nameHeading);
 
             // Create a p element for the ingredients
             var ingredientsParagraph = document.createElement('p');
             ingredientsParagraph.textContent = 'Ingredients: ' + getFoodIngredients(recipeResult);
-            drinkContainer.appendChild(ingredientsParagraph);
+            textDiv.appendChild(ingredientsParagraph);
 
             // Create a p element for the instructions
-            var instructionsParagraph = document.createElement('p');
-            instructionsParagraph.textContent = 'Instructions: ' + recipeResult.strInstructions;
-            drinkContainer.appendChild(instructionsParagraph);
+            // recipeResult.strInstructions.substring(0,150)  for intruction results
+            var instructionsButton = document.createElement('button');
+            var instructionsParagraph = document.createElement('p')
+            instructionsButton.classList.add('button', 'is-ghost',)
+            instructionsButton.style.cssText = 'padding-left: 0px; align-self: baseline'  //adjusts button styling
+            instructionsParagraph.classList.add('hide', 'instructionsFood')
+
+            // Enables toggle fucntion for recipe instructions
+            instructionsButton.onclick = function () {
+                instructionsParagraph.classList.toggle('hide')
+            }
+        
+            // var infoButton = document.createElement('button')
+            instructionsButton.textContent = 'Instructions';
+            instructionsParagraph.textContent = recipeResult.strInstructions
+            textDiv.appendChild(instructionsButton);
+            textDiv.appendChild(instructionsParagraph);
 
             // Append the drink container to the 'ingredientList' element
             ingredientListElement.appendChild(drinkContainer);
@@ -300,6 +394,11 @@ function displayFoodIngredients() {
         // Handle the case where 'finalDishes' is not a valid array
         ingredientListElement.textContent = 'No Recipes Found';
     }
+    setTimeout(function() {
+
+        emptyDishes();
+    }, 1000)
+   
 }
 //function to extract and format ingredients from a drink object
 function getFoodIngredients(recipeResult) {
@@ -318,12 +417,19 @@ function getFoodIngredients(recipeResult) {
     return ingredientsArray.join(', ');
 }
 
-
+function emptyDishes() {
+    foodText = [];
+    dishArray = [];
+    finalDishes = [];
+    matchArray = [];
+}
 
 
 // click event for food button
 foodButton.addEventListener('click', function(event) {
 event.preventDefault();
+// emptyDishes();
 ingredientList();
 
 })
+

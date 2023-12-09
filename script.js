@@ -367,14 +367,10 @@ function displayFoodIngredients() {
         console.log(finalDishes)
 
 
-
-
         // go through each recipe and create an HTML element
         finalDishes.forEach(function (recipeResult) {
 
-             
-           
-
+        
             // Create a container div for each recipe
             var drinkContainer = document.createElement('div');
             drinkContainer.classList.add('drink-container', 'flex');
@@ -392,13 +388,79 @@ function displayFoodIngredients() {
 
             // Create an h3 element for the recipe name
             var nameHeading = document.createElement('h3');
-            nameHeading.textContent = 'Name: ' + recipeResult.strMeal;
+            nameHeading.textContent = recipeResult.strMeal;
             textDiv.appendChild(nameHeading);
 
             // Create a p element for the ingredients
             var ingredientsParagraph = document.createElement('p');
-            ingredientsParagraph.textContent = 'Ingredients: ' + getFoodIngredients(recipeResult);
+            ingredientsParagraph.textContent = 'Ingredients:'
             textDiv.appendChild(ingredientsParagraph);
+            var listDiv = document.createElement('div');
+            textDiv.appendChild(listDiv);
+
+            // div for hiden full list until toggle button is hit
+            var longList = document.createElement('div')
+            textDiv.appendChild(longList)
+            longList.classList.add('hide')
+
+            //less button
+            var lessButton = document.createElement('button')
+            lessButton.classList.add('button', 'is-ghost', 'hide')
+            lessButton.style.cssText = 'align-self: baseline'
+            lessButton.textContent = 'Less...'; 
+            textDiv.appendChild(lessButton)
+            // less button toggle function
+            lessButton.onclick = function () {
+                listDiv.classList.toggle('hide')
+                longList.classList.toggle('hide')
+                lessButton.classList.toggle('hide')
+            }
+            
+            getFoodIngredients(recipeResult)
+            
+            var ingredientsPoints = ''
+            var longListIngredients = ''
+
+            for (var i = 0; i < ingredientsArray.length; i++) {
+
+                longListIngredients += `<li>${ingredientsArray[i]}</li>`
+                longList.innerHTML = longListIngredients;
+            }
+             
+
+                if (ingredientsArray.length > 15) {
+
+                    for (var i = 0; i < 15; i++) {
+
+                    console.log(ingredientsArray.length)
+                    ingredientsPoints += `<li>${ingredientsArray[i]}</li>`
+                    listDiv.innerHTML = ingredientsPoints;
+                    }
+                     var moreButton = document.createElement('button')
+                     moreButton.classList.add('button', 'is-ghost',)
+                     moreButton.style.cssText = 'align-self: baseline'
+                     moreButton.textContent = 'More...'; 
+                    listDiv.appendChild(moreButton)
+                     //Dynamically added 'more' button if condition is met
+                    
+                    moreButton.onclick = function () {
+                        listDiv.classList.toggle('hide')
+                        longList.classList.toggle('hide')
+                        lessButton.classList.toggle('hide')
+                    }
+
+                   
+
+                } else {
+                    for (var i = 0; i < ingredientsArray.length; i++) {
+                console.log(ingredientsArray.length)
+                ingredientsPoints += `<li>${ingredientsArray[i]}</li>`
+                listDiv.innerHTML = ingredientsPoints;
+             console.log(ingredientsArray[i])
+                     } }
+                            
+            // getFoodIngredients(recipeResult);
+            // console.log(getFoodIngredients(recipeResult))
 
             // Create a p element for the instructions
             // recipeResult.strInstructions.substring(0,150)  for intruction results
@@ -434,10 +496,13 @@ function displayFoodIngredients() {
     }, 1000)
    
 }
+
+var ingredientsArray = [];
+
 //function to extract and format ingredients from a drink object
 function getFoodIngredients(recipeResult) {
     // Extract and join the ingredients from the final object
-    var ingredientsArray = [];
+    
     for (var i = 1; i <= 15; i++) {
         var foodIngredient = recipeResult['strIngredient' + i];
         var measure = recipeResult['strMeasure' + i];
@@ -447,8 +512,11 @@ function getFoodIngredients(recipeResult) {
             ingredientsArray.push(foodIngredient);
         }
     }
+    console.log(ingredientsArray)
     // join the ingredients into a string
-    return ingredientsArray.join(', ');
+    return ingredientsArray;
+
+    
 }
 
 function emptyDishes() {

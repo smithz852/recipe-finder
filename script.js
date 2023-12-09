@@ -302,13 +302,10 @@ for (var i = 0; i < ingredient.length; i++) {
 
     var foodAPI = 'https://www.themealdb.com/api/json/v1/1/filter.php?i=' + ingredient[i];
 
-    console.log(ingredient[i]);
-    console.log(foodAPI);
     fetch(foodAPI).then(function(response) {
-        console.log(foodAPI);
         return response.json();
     }).then(function(data) {
-        console.log(data);
+        console.log('Data', data);
 // loop for pulling meal names out of returned data
         for (var i = 0; i < data.meals.length; i++) {
             dishArray.push(JSON.parse(data.meals[i].idMeal));
@@ -319,7 +316,6 @@ for (var i = 0; i < ingredient.length; i++) {
 setTimeout (function() {
 
     dishArray.sort(function(a, b){return a - b});
-    console.log(dishArray);
 
 // Slight delay to allow for array to be reorganized before running loop
     setTimeout (function() {
@@ -329,7 +325,7 @@ setTimeout (function() {
                 matchArray.push(dishArray[i]);
             }
         }
-    console.log(matchArray);
+    console.log('Matches', matchArray);
     fetchCheck();
     }, 500)
   }, 500)
@@ -341,15 +337,15 @@ function fetchCheck() {
     if (matchArray.length < 6) {
 
         var matchesQty = matchArray.length
-        console.log(matchArray.length);
+        
         var recipesNeeded = 6 - matchesQty;
  // Adds more recipes to array if there are not enough matches
         for (var i = 0; i < recipesNeeded; i++) {
             matchArray.push(dishArray[i])
-            console.log(dishArray[i])
+            
         }
 
-        console.log(matchArray);
+        console.log('Matches Check', matchArray);
         fetchDishAPI();
 
        } else {
@@ -365,7 +361,7 @@ function fetchDishAPI() {
       for (var i = 0; i < matchArray.length; i++) {
         mealID = matchArray[i]
         var dishInfoAPI = 'https://www.themealdb.com/api/json/v1/1/lookup.php?i=' + mealID;
-        console.log(mealID)
+        
         fetch(dishInfoAPI).then(function(response) {
             return response.json();
         }).then(function(data) {
@@ -375,11 +371,10 @@ function fetchDishAPI() {
            
         })
     }
-    console.log(finalDishes);
     setTimeout(function() {
 
         displayFoodIngredients(finalDishes);
-        console.log(finalDishes)
+        console.log('Final Dishes', finalDishes)
     }, 500) 
 
 }
@@ -414,9 +409,9 @@ function displayFoodIngredients() {
 
     if (drinkListElement.hasChildNodes()) {
         listContainer.classList.add('flex')
-        console.log('Has Children')
+        // console.log('Has Children')
     } else {
-        console.log('No Children')
+        // console.log('No Children')
         listContainer.classList.remove('flex')
     }
 
@@ -427,7 +422,6 @@ function displayFoodIngredients() {
     ingredientListElement.innerHTML = '';
     // Check if 'finalDishes' is an array and not empty
     if (Array.isArray(finalDishes) && finalDishes.length > 0) {
-        console.log(finalDishes)
 
 
         // go through each recipe and create an HTML element
@@ -495,7 +489,6 @@ function displayFoodIngredients() {
 
                     for (var i = 0; i < 10; i++) {
 
-                    console.log(ingredientsArray.length)
                     ingredientsPoints += `<li>${ingredientsArray[i]}</li>`
                     listDiv.innerHTML = ingredientsPoints;
                     }
@@ -514,10 +507,8 @@ function displayFoodIngredients() {
 
                 } else {
                     for (var i = 0; i < ingredientsArray.length; i++) {
-                console.log(ingredientsArray.length)
                 ingredientsPoints += `<li>${ingredientsArray[i]}</li>`
                 listDiv.innerHTML = ingredientsPoints;
-             console.log(ingredientsArray[i])
                      } }
 
                      ingredientsArray = [];
@@ -575,8 +566,7 @@ function getFoodIngredients(recipeResult) {
             ingredientsArray.push(foodIngredient);
         }
     }
-    console.log(ingredientsArray)
-    // join the ingredients into a string
+
     return ingredientsArray;
 }
 

@@ -132,8 +132,71 @@ function displayIngredients(drinks) {
 
             // Create a p element for the ingredients
             var ingredientsParagraph = document.createElement('p');
-            ingredientsParagraph.textContent = 'Ingredients: ' + getIngredients(drink);
+            ingredientsParagraph.textContent = 'Ingredients:'
             textDiv.appendChild(ingredientsParagraph);
+            var listDiv = document.createElement('div');
+            textDiv.appendChild(listDiv);
+
+            // div for hiden full list until toggle button is hit
+            var longList = document.createElement('div')
+            textDiv.appendChild(longList)
+            longList.classList.add('hide')
+
+            //less button
+            var lessButton = document.createElement('button')
+            lessButton.classList.add('button', 'is-ghost', 'hide')
+            lessButton.style.cssText = 'align-self: baseline'
+            lessButton.textContent = 'Less...'; 
+            textDiv.appendChild(lessButton)
+            // less button toggle function
+            lessButton.onclick = function () {
+                listDiv.classList.toggle('hide')
+                longList.classList.toggle('hide')
+                lessButton.classList.toggle('hide')
+            }
+            
+            getFoodIngredients(drink)
+            
+            var ingredientsPoints = ''
+            var longListIngredients = ''
+
+            for (var i = 0; i < ingredientsArray.length; i++) {
+
+                longListIngredients += `<li>${ingredientsArray[i]}</li>`
+                longList.innerHTML = longListIngredients;
+            }
+             
+
+                if (ingredientsArray.length > 10) {
+
+                    for (var i = 0; i < 10; i++) {
+
+                    console.log(ingredientsArray.length)
+                    ingredientsPoints += `<li>${ingredientsArray[i]}</li>`
+                    listDiv.innerHTML = ingredientsPoints;
+                    }
+                     var moreButton = document.createElement('button')
+                     moreButton.classList.add('button', 'is-ghost',)
+                     moreButton.style.cssText = 'align-self: baseline'
+                     moreButton.textContent = 'More...'; 
+                    listDiv.appendChild(moreButton)
+                     //Dynamically added 'more' button if condition is met
+                    
+                    moreButton.onclick = function () {
+                        listDiv.classList.toggle('hide')
+                        longList.classList.toggle('hide')
+                        lessButton.classList.toggle('hide')
+                    }
+
+                   
+
+                } else {
+                    for (var i = 0; i < ingredientsArray.length; i++) {
+                console.log(ingredientsArray.length)
+                ingredientsPoints += `<li>${ingredientsArray[i]}</li>`
+                listDiv.innerHTML = ingredientsPoints;
+             console.log(ingredientsArray[i])
+                     } }
 
             // Create a button for the instructions toggle
             var instructionsButton = document.createElement('button');

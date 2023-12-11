@@ -19,33 +19,33 @@ Link to deployed application: https://smithz852.github.io/recipe-finder/#
 # Credits
 
 Software Developers: 
-@smithz852
-@caaren10
-@ferewar
+- @smithz852
+- @caaren10
+- @ferewar
 
 CSS Framework:
 Bulma
-https://bulma.io/
-https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css
+- https://bulma.io/
+- https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css
 
 Server-side Application Programming Interface (APIs): 
-TheMealDB: https://www.themealdb.com/api.php https://www.themealdb.com/api/json/v1/1/filter.php?i=
-TheCocktailDB: https://www.thecocktaildb.com/api.php https://www.thecocktaildb.com/api/json/v1/1/search.php?s= 
+- TheMealDB: https://www.themealdb.com/api.php https://www.themealdb.com/api/json/v1/1/filter.php?i=
+- TheCocktailDB: https://www.thecocktaildb.com/api.php https://www.thecocktaildb.com/api/json/v1/1/search.php?s= 
 
 # Features
-main 
-html-feature
-foodAPI
-styling-feature
-local-storage
-shorten-instructions
-clear-recipes
-style-feature
-moreStyles-feture
-recipe-css
-flex-update
-recipeCard-style
-cleanup
-README-feat
+- main 
+- html-feature
+- foodAPI
+- styling-feature
+- local-storage
+- shorten-instructions
+- clear-recipes
+- style-feature
+- moreStyles-feture
+- recipe-css
+- flex-update
+- recipeCard-style
+- cleanup
+- README-feat
 
 

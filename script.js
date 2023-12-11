@@ -294,6 +294,7 @@ var ingredient = [];
 var dishArray = [];
 var finalDishes = [];
 var matchArray = [];
+var favoritesArray = [];
 
 // Fetch request to generate meal IDs based on the user's input ingredients
 function fetchFoodAPI() {
@@ -334,15 +335,12 @@ setTimeout (function() {
 
 // To check if match array has enough recipes
 function fetchCheck() {
-    if (matchArray.length < 6) {
-
+    if (matchArray.length < 10) {
         var matchesQty = matchArray.length
-        
-        var recipesNeeded = 6 - matchesQty;
+        var recipesNeeded = 10 - matchesQty;
  // Adds more recipes to array if there are not enough matches
         for (var i = 0; i < recipesNeeded; i++) {
             matchArray.push(dishArray[i])
-            
         }
 
         console.log('Matches Check', matchArray);
@@ -430,7 +428,7 @@ function displayFoodIngredients() {
         
             // Create a container div for each recipe
             var drinkContainer = document.createElement('div');
-            drinkContainer.classList.add('drink-container', 'flex');
+            drinkContainer.classList.add('drink-container', 'flex', 'relative');
 
             // photo placeholder withing div
             var imgContainer = ''
@@ -445,6 +443,7 @@ function displayFoodIngredients() {
 
             // Create an h3 element for the recipe name
             var nameHeading = document.createElement('h3');
+            nameHeading.classList.add('grabTitle')
             nameHeading.textContent = recipeResult.strMeal;
             textDiv.appendChild(nameHeading);
 
@@ -535,12 +534,25 @@ function displayFoodIngredients() {
             textDiv.appendChild(instructionsButton);
             textDiv.appendChild(instructionsParagraph);
 
+            //For star button
+            var favoritesButton = document.createElement('h4')
+            favoritesButton.classList.add('starIcon', 'material-symbols-outlined')
+            favoritesButton.textContent = 'star'
+            textDiv.appendChild(favoritesButton)
+
+            favoritesButton.onclick = function () {
+                  var recipeTitle = nameHeading.textContent
+                favoritesArray.push(recipeTitle)
+                storeFavorites();
+                 
+                 favoritesButton.classList.toggle('blueStar')
+            }
+
+
             // Append the drink container to the 'ingredientList' element
             ingredientListElement.appendChild(drinkContainer);
         });
     } else {
-        // Log the entire API response to the console for issues
-        // console.log('API Response:', drinks);
         // Handle the case where 'finalDishes' is not a valid array
         ingredientListElement.textContent = 'No Recipes Found';
     }
@@ -577,6 +589,11 @@ function emptyDishes() {
     matchArray = [];
 }
 
+function storeFavorites () {
+    localStorage.setItem('Favorites', JSON.stringify(favoritesArray))
+}
+
+
 
 // click event for food button
 foodButton.addEventListener('click', function(event) {
@@ -585,4 +602,6 @@ event.preventDefault();
 ingredientList();
 
 })
+
+
 

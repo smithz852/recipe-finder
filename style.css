@@ -129,3 +129,18 @@
   #foodRecipes {
     flex: 1 1 0;
   }
+
+.starIcon {
+  position: absolute;
+  right: 3%;
+  font-size: 40px !important;
+  cursor: pointer;
+}
+
+.blueStar {
+  color: blue;
+}
+
+.relative {
+  position: relative;
+}

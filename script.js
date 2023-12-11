@@ -591,7 +591,66 @@ function emptyDishes() {
 
 function storeFavorites () {
     localStorage.setItem('Favorites', JSON.stringify(favoritesArray))
+    favoritesListData();
+   
 }
+var listArray = [];
+function favoritesListData() {
+    
+    var favoriteData = localStorage.getItem('Favorites');
+    
+    if (favoriteData === null){
+        return;
+    }
+    var favoriteSplit = JSON.parse(favoriteData.split('\, '))
+
+   for (var i = 0; i < favoriteSplit.length; i++) {
+       listArray.push(favoriteSplit[i])
+       console.log(favoriteSplit[i])
+   }
+    console.log(listArray)
+    favoritesListCreate();
+}
+
+favoritesListData();
+favoritesListCreate();
+
+function favoritesListCreate() {
+    var dropdown = ''
+    dropdown = document.querySelector('.navbar-dropdown')
+ 
+for (var i = 0; i < listArray.length; i++) {
+
+    var favoriteListItem = document.createElement('a')
+    favoriteListItem.classList.add('navbar-item')
+    favoriteListItem.textContent = listArray[i]
+    dropdown.appendChild(favoriteListItem)
+   }
+
+   if (listArray < 0) {
+    return;
+   }
+   favoritesArray = [];
+   listArray = [];
+}
+
+// function ingredientList() {
+//     var food = foodInput.value
+//     var foodSplit = food.split(', ');
+    
+// for (var i = 0; i < foodSplit.length; i++) {
+//     ingredient.push(foodSplit[i])
+//     console.log(ingredient)
+// }
+
+//     setTimeout(function() {
+//         fetchFoodAPI();
+//     }, 500)
+// }
+
+// var ingredientsParagraph = document.createElement('p');
+//             ingredientsParagraph.textContent = 'Ingredients:'
+//             textDiv.appendChild(ingredientsParagraph);
 
 
 

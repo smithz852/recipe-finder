@@ -12,18 +12,20 @@
 
 <body>
   <nav class="navbar is-primary is-fixed-top" role="navigation" aria-label="main navigation">
-    <header class="title is-1 has-text-centered has-text-weight-bold has-text-black" style="margin: 0 5px; font-family: 'Caveat', cursive;">Recipe Finder</header>
+    <header class="title is-1 has-text-centered has-text-weight-bold has-text-black"
+      style="margin: 0 5px; font-family: 'Caveat', cursive;">Recipe Finder</header>
     <div class="navbar-brand">
-      <a role="button" class="navbar-burger has-text-black" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+      <a role="button" class="navbar-burger has-text-black" aria-label="menu" aria-expanded="false"
+        data-target="navbarBasicExample" onclick="toggleNavbar()">
         <span aria-hidden="true"></span>
         <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span> 
       </a>
     </div>
     <div id="navbarBasicExample" class="navbar-menu">
       <div class="navbar-end">
-        <a class="navbar-item has-text-warning-light" href="#" onclick="reloadPage()">Home</a>
-        <a class="navbar-item has-text-warning-light" href="#">Favorites</a>
+        <a class="navbar-item has-text-black" href="#" onclick="reloadPage()">Home</a>
+        <a class="navbar-item has-text-black" href="#">Favorites</a>
       </div>
     </div>
   </nav>

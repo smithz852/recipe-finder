@@ -1,13 +1,9 @@
-// visibility of the dropdown menu
-document.addEventListener('DOMContentLoaded', function () {
-    var burger = document.querySelector('.navbar-burger');
-    var dropdown = document.querySelector('.navbar-dropdown');
 
-    burger.addEventListener('click', function () {
-      // Toggle the display property of the dropdown
-      dropdown.style.display = dropdown.style.display === 'none' || dropdown.style.display === '' ? 'block' : 'none';
-    });
-  });
+function toggleNavbar() {
+    console.log('toggleNavbar called');
+  var navbar = document.getElementById('navbarBasicExample');
+  navbar.classList.toggle('is-active');
+}
 
 // reload page function
 

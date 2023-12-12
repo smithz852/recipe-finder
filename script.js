@@ -270,6 +270,8 @@ function clearPage() {
     document.getElementById('foodRecipes').innerHTML = '';
     // Clear ingredient array
     ingredient = [];
+    //Clear food local storage
+    localStorage.removeItem('lastRecipes')
 }
 loadLastSearchTerm();
 // ****FOOD API CONTENT STARTS HERE****
@@ -343,9 +345,10 @@ function fetchCheck() {
 
         console.log('Matches Check', matchArray);
         fetchDishAPI();
-
+        localStorage.setItem('lastRecipes', matchArray)
        } else {
         fetchDishAPI();
+        localStorage.setItem(matchArray)
        }
 }
 
@@ -371,6 +374,7 @@ function fetchDishAPI() {
 
         displayFoodIngredients(finalDishes);
         console.log('Final Dishes', finalDishes)
+       
     }, 500) 
 
 }
@@ -391,8 +395,32 @@ for (var i = 0; i < foodSplit.length; i++) {
 }
 
 
+function reloadRecipe () {
+    var reload = localStorage.getItem('lastRecipes')
+    if (reload) {
+        
+    var reloadSplit = reload.split(',');
+        for (var i = 0; i < reloadSplit.length; i++) {
+            matchArray.push(reloadSplit[i])
+            console.log(matchArray[i])
+        }
+    
+        setTimeout(function() {
+            fetchDishAPI();
+        }, 500)
+    
+    } else {
+return;
+    }
+}
+        
+    
+       
 
-//spinach, chicken, potato, marinara, onion, beef
+
+reloadRecipe();
+
+
 
 
 
@@ -540,6 +568,7 @@ function displayFoodIngredients() {
         // Handle the case where 'finalDishes' is not a valid array
         ingredientListElement.textContent = 'No Recipes Found';
     }
+    
     setTimeout(function() {
 
         emptyDishes();
@@ -577,7 +606,7 @@ function emptyDishes() {
 // click event for food button
 foodButton.addEventListener('click', function(event) {
 event.preventDefault();
-// emptyDishes();
+ingredient = [];
 ingredientList();
 
 })

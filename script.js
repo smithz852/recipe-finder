@@ -90,9 +90,9 @@ function displayIngredients(drinks) {
     // To check if content is already on page, and adds a flex box if so
     if (foodListElement.hasChildNodes()) {
         listContainer.classList.add('flex')
-        console.log('Has Children')
+        // console.log('Has Children')
     } else {
-        console.log('No Children')
+        // console.log('No Children')
         foodListElement.classList.remove('flex')
     }
 
@@ -186,10 +186,8 @@ function displayIngredients(drinks) {
  
                  } else {
                      for (var i = 0; i < ingredientsArray.length; i++) {
-                 console.log(ingredientsArray.length)
                  ingredientsPoints += `<li>${ingredientsArray[i]}</li>`
                  listDiv.innerHTML = ingredientsPoints;
-              console.log(ingredientsArray[i])
                       } }
  
                       ingredientsArray = [];
@@ -366,8 +364,6 @@ function fetchDishAPI() {
         }).then(function(data) {
         // logs all final dishes to be put on webpage
            finalDishes.push(data.meals[0]) 
-        //    console.log(finalDishes)
-           
         })
     }
     setTimeout(function() {
@@ -394,7 +390,7 @@ for (var i = 0; i < foodSplit.length; i++) {
     }, 500)
 }
 
-
+//For taking match IDs from local storage and reloading them on page
 function reloadRecipe () {
     var reload = localStorage.getItem('lastRecipes')
     if (reload) {
@@ -402,7 +398,6 @@ function reloadRecipe () {
     var reloadSplit = reload.split(',');
         for (var i = 0; i < reloadSplit.length; i++) {
             matchArray.push(reloadSplit[i])
-            console.log(matchArray[i])
         }
     
         setTimeout(function() {
@@ -414,15 +409,7 @@ return;
     }
 }
         
-    
-       
-
-
 reloadRecipe();
-
-
-
-
 
 
 //function to display food recipe information on the webpage
@@ -439,8 +426,7 @@ function displayFoodIngredients() {
         listContainer.classList.remove('flex')
     }
 
-    // console.log('API Response:', drinks);
-    // Get the HTML element for the list of cocktails
+    // Get the HTML element for the list of recipes
     var ingredientListElement = document.getElementById('foodRecipes');
     // Clear the existing content
     ingredientListElement.innerHTML = '';
@@ -484,7 +470,7 @@ function displayFoodIngredients() {
             textDiv.appendChild(longList)
             longList.classList.add('hide')
 
-            //less button
+            //less button for ingredient content
             var lessButton = document.createElement('button')
             lessButton.classList.add('button', 'is-ghost', 'hide')
             lessButton.style.cssText = 'align-self: baseline'
@@ -501,7 +487,7 @@ function displayFoodIngredients() {
             
             var ingredientsPoints = ''
             var longListIngredients = ''
-
+             // Loops ingredients onto page
             for (var i = 0; i < ingredientsArray.length; i++) {
 
                 longListIngredients += `<li>${ingredientsArray[i]}</li>`
@@ -537,11 +523,9 @@ function displayFoodIngredients() {
 
                      ingredientsArray = [];
                             
-            // getFoodIngredients(recipeResult);
-            // console.log(getFoodIngredients(recipeResult))
+            
 
             // Create a p element for the instructions
-            // recipeResult.strInstructions.substring(0,150)  for intruction results
             var instructionsButton = document.createElement('button');
             var instructionsParagraph = document.createElement('p')
             instructionsButton.classList.add('button', 'is-ghost',)
@@ -563,8 +547,6 @@ function displayFoodIngredients() {
             ingredientListElement.appendChild(drinkContainer);
         });
     } else {
-        // Log the entire API response to the console for issues
-        // console.log('API Response:', drinks);
         // Handle the case where 'finalDishes' is not a valid array
         ingredientListElement.textContent = 'No Recipes Found';
     }

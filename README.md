@@ -10,7 +10,7 @@ To use the Recipe Finder, users should access the deployed link through their we
 
 # Usage
 
-To use the Recipe Finder, users should access the deployed link through their web browser. Next, users can input their ingredients into the form and then select for Food or Drinks recipes. 
+To use the Recipe Finder, users should access the deployed link through their web browser. Next, users must input a single (1) ingredient item into the form and then select for Food or Drinks recipes. 
 
 ![Home page of Recipe Finder website](assets/RecipeFinder-HomePage.png)
 
